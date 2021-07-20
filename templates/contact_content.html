@@ -1,2 +1,21 @@
 <h1>Contact us!</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem corporis cum delectus doloremque eius eos, et illo incidunt libero obcaecati odio, quidem ratione rerum sapiente sequi sint, ut vitae voluptate. </p>
+<form action="{{ url_for('contact_us') }}" method="post" id="contact-form">
+    <label for="name">Name:</label>
+    <input id="name" type="text" name="name"><br>
+    <label for="email">Email:</label>
+    <input id="email" type="email" name="email"><br>
+    <label for="comment">Comment:</label>
+    <textarea id="comment" name="comment">
+        Enter your comment!
+    </textarea><br>
+    <input onclick="postForm()" type="button" value="send">
+</form>
+
+<script>
+    function postForm(){
+        let contact_form = $('#contact-form')
+        $.post("{{ url_for('contact_us') }}", contact_form.serialize() , function (response) {
+            alert(response)
+        })
+    }
+</script>

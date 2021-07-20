@@ -1,1 +1,21 @@
-Home!!!!!!!
+<ul id="users-list" class="list">
+
+</ul>
+<div id="user-detail"></div>
+
+<script>
+    function getUserDetail(id) {
+        $.get('{{ url_for('user_detail') }}'+id, function (resp, status) {
+            user = resp
+                $('#user-detail').html(`First name: ${user.first_name}`)
+            }
+        )
+    }
+
+    $.get('{{ url_for('users') }}', function (resp, status) {
+        let users = resp.users;
+        for (let user of users) {
+            $('#users-list').append(`<li onclick="getUserDetail(${user.id})" class='list-item'>${user.first_name} ${user.last_name}</li>`)
+        }
+    })
+</script>
