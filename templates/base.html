@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Maktab 53{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+
+    <style>
+        #about-content > h1 {
+            color: red!important;
+        }
+    </style>
+
+    <style>
+        #header-bar {
+            height: 50px;
+            background-color: black;
+            width: 100%;
+            position: sticky;
+        }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<div id="header-bar">
+    <a onclick="loadContent('home')" >Home</a>
+    <a onclick="loadContent('about')" >About</a>
+    <a onclick="loadContent('contact')">Contact us</a>
+</div>
+
+<div id="main-content">
+{% block content %}
+{% endblock %}
+</div>
+
+
+<script>
+    function loadContent(page){
+        $.get('{{ url_for('index') }}'+page, function (response, status, xhr) {
+            {#console.log(response)#}
+            $('#main-content').html(response)
+        })
+    }
+</script>
+
+
+</body>
+</html>
